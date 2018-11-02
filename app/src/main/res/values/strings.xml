@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Stockker</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Profile</string>
+    <string name="nav_header_subtitle">https://www.linkedin.com/in/harshit181/</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>
