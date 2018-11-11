@@ -1,10 +1,8 @@
 package stocker.harshit.com.stockker.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.Locale;
 
 import stocker.harshit.com.stockker.R;
 import stocker.harshit.com.stockker.nseDataDownloader.StockInfo;

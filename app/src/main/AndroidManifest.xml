@@ -22,6 +22,12 @@
         <activity android:name=".AppData"
             android:label="something"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
+        <provider
+            android:name="br.com.mauker.materialsearchview.db.HistoryProvider"
+            android:authorities="br.com.mauker.materialsearchview.searchhistorydatabase"
+            android:exported="false"
+            android:protectionLevel="signature"
+            android:syncable="true"/>
     </application>
 
 </manifest>
