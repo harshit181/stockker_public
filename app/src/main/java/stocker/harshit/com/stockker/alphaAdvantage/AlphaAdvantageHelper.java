@@ -1,6 +1,9 @@
 package stocker.harshit.com.stockker.alphaAdvantage;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
@@ -9,6 +12,11 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.CandleStickChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.CandleData;
+import com.github.mikephil.charting.data.CandleDataSet;
+import com.github.mikephil.charting.data.CandleEntry;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 
@@ -18,10 +26,13 @@ import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 import java.net.URL;
+
+import stocker.harshit.com.stockker.R;
 
 public class AlphaAdvantageHelper extends AsyncTask<String, Integer,TimeSeries> {
 
@@ -172,5 +183,35 @@ public class AlphaAdvantageHelper extends AsyncTask<String, Integer,TimeSeries> 
         a.setTextSize(TypedValue.COMPLEX_UNIT_SP,23);
         someView.addView(a);
 
+        CandleStickChart chart =((Activity)mContext).findViewById(R.id.chart);
+        ArrayList<CandleEntry> entries = new ArrayList<CandleEntry>();
+        int count=0;
+        for(Date keyDate:tm_srs.getStocksValue().keySet())
+        {
+           DataObject tempStock= tm_srs.getStocksValue().get(keyDate);
+
+            entries.add(new CandleEntry(count , Float.valueOf(tempStock.getHigh()), Float.valueOf(tempStock.getLow()), Float.valueOf(tempStock.getOpen()), Float.valueOf(tempStock.getClose())));
+            //entries.add(new CandleEntry(keyDate.getTime(), Float.valueOf(tempStock.getHigh()), Float.valueOf(tempStock.getLow()), Float.valueOf(tempStock.getOpen()), Float.valueOf(tempStock.getClose())));
+            count++;
+        }
+
+        CandleDataSet dataSet = new CandleDataSet(entries,"# of Calls");
+        CandleData data = new CandleData(dataSet);
+        dataSet.setColor(Color.rgb(80, 80, 80));
+        dataSet.setShadowColor(Color.DKGRAY);
+        dataSet.setShadowWidth(0.7f);
+
+        dataSet.setDecreasingColor(Color.RED);
+        dataSet.setDecreasingPaintStyle(Paint.Style.FILL);
+        dataSet.setIncreasingColor(Color.rgb(122, 242, 84));
+        dataSet.setIncreasingPaintStyle(Paint.Style.FILL);
+        dataSet.setNeutralColor(Color.BLUE);
+
+        dataSet.setValueTextColor(Color.RED);
+        chart.setData(data);
+        XAxis xAxis =chart.getXAxis();
+
+       // xAxis.setValueFormatter(new ChartDateFormator() );
+        chart.invalidate();
     }
 }

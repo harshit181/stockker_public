@@ -2,14 +2,24 @@ package stocker.harshit.com.stockker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.CandleStickChart;
+import com.github.mikephil.charting.data.CandleData;
+import com.github.mikephil.charting.data.CandleDataSet;
+import com.github.mikephil.charting.data.CandleEntry;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import androidx.annotation.ColorInt;
 import stocker.harshit.com.stockker.alphaAdvantage.AlphaAdvantageHelper;
 import stocker.harshit.com.stockker.alphaAdvantage.TimeSeries;
 import stocker.harshit.com.stockker.nseDataDownloader.StockInfo;
@@ -37,6 +47,7 @@ public class AppData extends Activity {
        // AlphaAdvantageHelper.getData("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=NSE:"+qwe.getSymbol()+"&apiKey="+api)
          AlphaAdvantageHelper helper=new AlphaAdvantageHelper(this,ln);
         helper.execute("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=NSE:"+qwe.getSymbol()+"&apikey="+api);
+
 
     }
 }

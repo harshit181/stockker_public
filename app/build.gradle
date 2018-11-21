@@ -28,7 +28,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
     implementation 'com.google.code.gson:gson:2.8.5'
-    compile "commons-io:commons-io:+"
+    implementation "commons-io:commons-io:+"
     implementation 'br.com.mauker.materialsearchview:materialsearchview:1.2.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.1.0-alpha01'

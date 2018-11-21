@@ -28,10 +28,11 @@ import java.util.ArrayList;
 import br.com.mauker.materialsearchview.MaterialSearchView;
 import stocker.harshit.com.stockker.adapter.StockAdapter;
 import stocker.harshit.com.stockker.fragments.AllStockFragment;
+import stocker.harshit.com.stockker.fragments.SearchFragment;
 import stocker.harshit.com.stockker.nseDataDownloader.StockInfo;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,AllStockFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener ,AllStockFragment.OnFragmentInteractionListener ,SearchFragment.OnFragmentInteractionListener {
 
 
     private StockAdapter adapter;
@@ -44,12 +45,18 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setFragment();
-        //Adding Search related code
+        //Adding SearchFragment related code
         searchView = findViewById(R.id.search_view);
         searchView.adjustTintAlpha(0.8f);
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if(query.equals(""))
+                {
+                    setFragment();
+                }
+                else
+                setSearchFragment(query);
                 return false;
             }
 
@@ -114,6 +121,15 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, allStockFragment);
         //transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void setSearchFragment(String sss)
+    {
+        Fragment searchFrag = SearchFragment.newInstance(sss,null);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, searchFrag);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -218,4 +234,5 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 }
